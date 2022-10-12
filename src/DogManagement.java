@@ -1,3 +1,4 @@
+
 /*-------------------------------------------------------------
 # Program 6: MPLS Dog Management System using OOP Principles
 **Programs 6 is similar in functionality to program 5**
@@ -53,12 +54,134 @@ If you prefer, you can also submit the .java files to Sakai.
 
     [REPLACE MY INFORMATION WITH YOURS]
     Course: COMP 170, Fall 1 2022
-    System: Visual Studio Code, Windows 10
-    Author: C. Fulton
+    System: Visual Studio Code, MacOS 12.6
+    Author: V. Martinez
  */
-public class DogManagement {
-    public static void main(String[] args) throws Exception {
-        
+
+import java.util.ArrayList;
+import java.util.Scanner; 
+import java.io.FileInputStream;
+import java.io.IOException;
+
+
+ public class DogManagement {
+    static Scanner input = new Scanner(System.in);
+       
+    //collection for array list 
+    static ArrayList<Dog> dogList = new ArrayList<Dog>();
+
+    
+    public static void main(String[] args) throws IOException {
+
+        FileInputStream fileByteStream = new FileInputStream("doginfo.csv");
+        Scanner fileScnr = new Scanner(fileByteStream); 
+
+        String dog1;
+
+        dog1 = fileScnr.nextLine(); 
+        System.out.println(dog1);
+
         //DECLARATIONS
+        int END = 4;
+        int MAXDOGS = 12;
+        int menuOption; 
+        int dogCount = 0; 
+        
+        System.out.println("Welcome, this program allows for a care attendant to be able to create, retrieve and update a dog record from the system.");
+
+        menuOption = displayPrompt();
+        while (menuOption != END) {
+            switch (menuOption) {
+                case 1:
+                while (dogCount <= MAXDOGS) {
+                    //createRecord();
+                    dogCount = dogCount+1;
+                }
+                //menuOption = displayPrompt();
+                break;
+                    
+                case 2:
+                displayRecord(dogCount);
+                break;
+                    
+                case 3:
+                updateRecord(dogCount);
+               // menuOption = displayPrompt();
+                break;
+                    
+                default: 
+                System.out.print("Invalid option. Please enter another menu option: ");
+                menuOption = displayPrompt();
+                break;
+            }
+            menuOption = displayPrompt();
+        //dogCount++;
+        }
+        System.out.println("PROGRAM ENDING");
+        fileByteStream.close();    
+    }
+    
+
+    public static int displayPrompt() {
+        int menuOption;
+
+        System.out.println("\nSelect a menu option:");
+        System.out.println("\t1) Create a dog record");
+        System.out.println("\t2) Display dog record");
+        System.out.println("\t3) Update dog record");
+        System.out.println("\t4) Exit Program");
+        
+        System.out.print("Enter selection here --> ");
+        //INPUT
+        menuOption = Integer.parseInt(input.next());
+
+        return menuOption;
+    }
+
+    public static void createRecord(Dog dog) {
+        dogList.add(dog);
+    }
+    public static void updateRecord(int dogCount) {
+
+    }
+
+    public static void displayRecord(int dogCount) {
+
     }
 }
+        
+
+        
+        /**int newDogID = 0;
+        int newDogAge = 0;
+        String newDogName = null;
+        double newDogWeight = 0;
+        String dogRecord = null;
+
+        if (dogCount < MAXDOGS) {
+            System.out.print("Enter dog's age: ");
+            newDogAge = input.nextInt();
+            //CHECK System.out.print(newDogAge)
+
+            System.out.print("Enter dog's ID number: ");
+            newDogID = input.nextInt();
+            
+
+            System.out.print("Enter dog's weight: ");
+            newDogWeight = input.nextDouble();
+            
+            System.out.print("Enter dog's name: ");
+            newDogName = input.next();
+           
+        //
+        }
+        dogRecord = ("\nDog ID: " + newDogID + 
+                     "\nDog Name: " + newDogName +
+                     "\nDog Age: " + newDogAge +
+                     "\nDog Weight: " + newDogWeight);
+
+        System.out.println("\nThe following information has been entered: ");
+        System.out.println(dogRecord);
+    }*/
+
+    
