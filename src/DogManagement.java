@@ -59,7 +59,8 @@ If you prefer, you can also submit the .java files to Sakai.
  */
 
 import java.util.ArrayList;
-import java.util.Scanner; 
+import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -72,17 +73,90 @@ import java.io.IOException;
 
     
     public static void main(String[] args) throws IOException {
-
         FileInputStream fileByteStream = new FileInputStream("doginfo.csv");
-        Scanner fileScnr = new Scanner(fileByteStream); 
+        Scanner fileScnr = new Scanner(fileByteStream);
 
-        String dog1;
+        //just a check for myself to make sure file is being read correctly>>
+        readFile(fileByteStream, fileScnr);
+        System.out.println("Please choose from the following dog names: \n");
+        //for (Dog dog: dogList) {
+        //    String name = dog.getName();
 
+        //    System.out.println("Name: " + name);
+        //}
+        //works correctly^^
+        int menuOption = displayPrompt();
+        System.out.println("You selected: " + menuOption);
+    }
+
+    public static void readFile(FileInputStream file, Scanner fileScnr) {
+        //FileInputStream fileByteStream = new FileInputStream("doginfo.csv");
+        //Scanner fileScnr = new Scanner(fileByteStream); 
+       
+        StringTokenizer token = null;
+        
+        String firstLine = fileScnr.nextLine();
+        //System.out.println(firstLine);
+        
+        while (fileScnr.hasNextLine()) {
+            
+            token = new StringTokenizer(fileScnr.nextLine(), ",");
+            
+            
+            int ID = Integer.parseInt(token.nextToken());
+            String name = token.nextToken();
+            int weight = Integer.parseInt(token.nextToken());
+            int age = Integer.parseInt(token.nextToken());
+
+            //System.out.println(ID + name + weight + age );
+            
+            Dog dog = new Dog(name, ID, weight, age); 
+            dog.setAge(age);
+            dog.setID(ID);
+            dog.setWeight(weight);
+            dog.setName(name);
+
+            dogList.add(dog);
+            //System.out.println(dog.outputInfo());
+
+        }
+        
+        fileScnr.close();
+    }
+    public static int displayPrompt() {
+        int menuOption;
+
+        System.out.println("\nSelect a menu option:");
+        System.out.println("\t1) Create a dog record");
+        System.out.println("\t2) Display dog record");
+        System.out.println("\t3) Update dog record");
+        System.out.println("\t4) Exit Program");
+        
+        System.out.print("Enter selection here --> ");
+        //INPUT
+        menuOption = Integer.parseInt(input.next());
+
+        return menuOption;
+    }
+}
+            
+
+        
+        
+       
+
+
+
+        /* 
+        check to make sure it reads file:
         dog1 = fileScnr.nextLine(); 
         System.out.println(dog1);
+        */
+
+        
 
         //DECLARATIONS
-        int END = 4;
+      /*   int END = 4;
         int MAXDOGS = 12;
         int menuOption; 
         int dogCount = 0; 

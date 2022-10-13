@@ -1,7 +1,7 @@
 public class Dog {
     //blueprint that describes all attributes/properties of the object 
     private int ID;
-    private double weight ;
+    private int weight ;
     private String name;
     private int age;
 
@@ -14,7 +14,7 @@ public class Dog {
     }
 
     // overloaded constructor to instantiate object 
-    public Dog(String name, int ID, double weight, int age) {
+    public Dog(String name, int ID, int weight, int age) {
         this.name = name;
         this.ID = ID;
         this.weight = weight;
@@ -39,7 +39,7 @@ public class Dog {
         return ID;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
     public double getWeight () {
@@ -56,8 +56,8 @@ public class Dog {
 //Instance method because there is no static keyword 
 //static methods belong to the class, instance methods belong to the object 
 // working method because it uses the data in the class 
-    public void outputNameID() {
-    System.out.println("Name: " + name + "\nID: " + ID + "\n Age: " + age + "\nWeight: " + weight);
+    public String outputInfo() {
+    return "Name: " + name + "\nID: " + ID + "\nAge: " + age + "\nWeight: " + weight;
     }
 
 }
