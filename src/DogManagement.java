@@ -63,7 +63,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ListIterator;
+
 
 
  public class DogManagement {
@@ -113,7 +113,7 @@ import java.util.ListIterator;
                 break;
                     
                 case 3:
-                //updateRecord();
+                updateRecord(MAXDOGS);
                 break;
                     
                 default: 
@@ -181,7 +181,7 @@ import java.util.ListIterator;
         int newDogAge = 0;
         String newDogName = null;
         int newDogWeight = 0;
-        String dogRecord = null;
+        
 
         if (dogCount < MAXDOGS) {
             System.out.print("Enter dog's name: ");
@@ -226,143 +226,32 @@ import java.util.ListIterator;
             }
         }
             
-        
-            
-        //return dogString;
-        
-            
     }
 
-                //int i = 0;
-            
-                
-        
-    }
-        
-       
+    public static void updateRecord(int MAXDOGS) {
+        boolean dogFound = false;
 
-        //iterator = dogList.listIterator();
-        //return dogChoice;
-        
-
-
-            
-
-        
-        
-       
-
-
-
-        /* 
-        check to make sure it reads file:
-        dog1 = fileScnr.nextLine(); 
-        System.out.println(dog1);
-        */
-
-        
-
-        //DECLARATIONS
-      /*   int END = 4;
-        int MAXDOGS = 12;
-        int menuOption; 
-        int dogCount = 0; 
-        
-        System.out.println("Welcome, this program allows for a care attendant to be able to create, retrieve and update a dog record from the system.");
-
-        menuOption = displayPrompt();
-        while (menuOption != END) {
-            switch (menuOption) {
-                case 1:
-                while (dogCount <= MAXDOGS) {
-                    //createRecord();
-                    dogCount = dogCount+1;
-                }
-                //menuOption = displayPrompt();
-                break;
-                    
-                case 2:
-                displayRecord(dogCount);
-                break;
-                    
-                case 3:
-                updateRecord(dogCount);
-               // menuOption = displayPrompt();
-                break;
-                    
-                default: 
-                System.out.print("Invalid option. Please enter another menu option: ");
-                menuOption = displayPrompt();
-                break;
-            }
-            menuOption = displayPrompt();
-        //dogCount++;
+        System.out.println("\nPlease select an ID number from the following list:");
+        for (Dog dog: dogList) {
+            String name = dog.getName();
+            int ID = dog.getID();
+            System.out.println("ID: " + ID + " for " + name);
         }
-        System.out.println("PROGRAM ENDING");
-        fileByteStream.close();    
-    }
-    
+        System.out.print("ID# ");
+        int updateID = Integer.parseInt(input.next());
 
-    public static int displayPrompt() {
-        int menuOption;
-
-        System.out.println("\nSelect a menu option:");
-        System.out.println("\t1) Create a dog record");
-        System.out.println("\t2) Display dog record");
-        System.out.println("\t3) Update dog record");
-        System.out.println("\t4) Exit Program");
-        
-        System.out.print("Enter selection here --> ");
-        //INPUT
-        menuOption = Integer.parseInt(input.next());
-
-        return menuOption;
-    }
-
-    public static void createRecord(Dog dog) {
-        dogList.add(dog);
-    }
-    public static void updateRecord(int dogCount) {
-
-    }
-
-    public static void displayRecord(int dogCount) {
-
-    }
+        for (Dog dog: dogList) {
+            if (dog.getID() == updateID) {
+                int i = dogList.indexOf(dog);
+                dogFound = true;
+                dogList.remove(i);
+                createRecord( i,  MAXDOGS);
+            } 
+            
+        }
+        if (dogFound != true) {
+            System.out.println("Dog ID not in our system.");
+        }
+    }       
 }
-        
-
-        
-        /**int newDogID = 0;
-        int newDogAge = 0;
-        String newDogName = null;
-        double newDogWeight = 0;
-        String dogRecord = null;
-
-        if (dogCount < MAXDOGS) {
-            System.out.print("Enter dog's age: ");
-            newDogAge = input.nextInt();
-            //CHECK System.out.print(newDogAge)
-
-            System.out.print("Enter dog's ID number: ");
-            newDogID = input.nextInt();
-            
-
-            System.out.print("Enter dog's weight: ");
-            newDogWeight = input.nextDouble();
-            
-            System.out.print("Enter dog's name: ");
-            newDogName = input.next();
-           
-        //
-        }
-        dogRecord = ("\nDog ID: " + newDogID + 
-                     "\nDog Name: " + newDogName +
-                     "\nDog Age: " + newDogAge +
-                     "\nDog Weight: " + newDogWeight);
-
-        System.out.println("\nThe following information has been entered: ");
-        System.out.println(dogRecord);
-    }*/
-
-    
+ 
