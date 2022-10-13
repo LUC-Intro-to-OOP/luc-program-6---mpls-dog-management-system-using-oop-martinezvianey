@@ -63,6 +63,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ListIterator;
 
 
  public class DogManagement {
@@ -75,18 +76,54 @@ import java.io.IOException;
     public static void main(String[] args) throws IOException {
         FileInputStream fileByteStream = new FileInputStream("doginfo.csv");
         Scanner fileScnr = new Scanner(fileByteStream);
+        
+        int END = 4;
+        int MAXDOGS = 12;
+        int menuOption; 
+        int dogCount; 
+
+        
+        
 
         //just a check for myself to make sure file is being read correctly>>
         readFile(fileByteStream, fileScnr);
-        System.out.println("Please choose from the following dog names: \n");
+        dogCount = dogList.size();
+
+        //System.out.println("Please choose from the following dog names: \n");
         //for (Dog dog: dogList) {
         //    String name = dog.getName();
 
         //    System.out.println("Name: " + name);
         //}
         //works correctly^^
-        int menuOption = displayPrompt();
-        System.out.println("You selected: " + menuOption);
+        menuOption = displayPrompt();
+        //check>> System.out.println("You selected: " + menuOption);
+        while (menuOption != END) {
+            switch (menuOption) {
+                case 1:
+                while (dogCount <= MAXDOGS) {
+                    createRecord(dogCount, MAXDOGS);
+                    dogCount = dogCount+1;
+                    break;
+                }
+                break;
+                    
+                case 2:
+                displayRecord();
+                break;
+                    
+                case 3:
+                //updateRecord();
+                break;
+                    
+                default: 
+                System.out.print("Invalid option. Please enter another menu option: ");
+                //menuOption = displayPrompt();
+                break;
+            }
+            menuOption = displayPrompt();
+        
+        }
     }
 
     public static void readFile(FileInputStream file, Scanner fileScnr) {
@@ -138,7 +175,77 @@ import java.io.IOException;
 
         return menuOption;
     }
-}
+
+    public static void createRecord(int dogCount, int MAXDOGS) {
+        int newDogID = 0;
+        int newDogAge = 0;
+        String newDogName = null;
+        int newDogWeight = 0;
+        String dogRecord = null;
+
+        if (dogCount < MAXDOGS) {
+            System.out.print("Enter dog's name: ");
+            newDogName = input.next();
+            System.out.print("Enter dog's ID number: ");
+            newDogID = input.nextInt();
+            System.out.print("Enter dog's age: ");
+            newDogAge = input.nextInt();
+            System.out.print("Enter dog's weight: ");
+            newDogWeight = input.nextInt();
+
+            Dog dog = new Dog(newDogName, newDogID, newDogWeight, newDogAge);
+            dogList.add(dog);
+
+            System.out.println("\nThe following information has been entered: ");
+            System.out.print(dog.outputInfo());
+            
+        //
+        }
+    }
+    public static void displayRecord() {
+        boolean dogFound;
+        System.out.println("\nPlease select an ID number from the following list:");
+        for (Dog dog: dogList) {
+            String name = dog.getName();
+            int ID = dog.getID();
+            System.out.println("ID: " + ID + " for " + name);
+        }
+        System.out.print("ID# ");
+        int displayID = Integer.parseInt(input.next());
+        while (dogFound = false); {
+            for (Dog dog: dogList) {        
+                if (dog.getID() == displayID) {
+                    System.out.println("You selected dog ID# " + displayID + " \n" + dog.outputInfo());
+                    dogFound = true;
+                    break;
+                        //System.out.println(dogString);
+                }
+            }
+            if (dogFound != true) {
+                System.out.println("Dog ID not in our system.");
+            }
+        }
+            
+        
+            
+        //return dogString;
+        
+            
+    }
+
+                //int i = 0;
+            
+                
+        
+    }
+        
+       
+
+        //iterator = dogList.listIterator();
+        //return dogChoice;
+        
+
+
             
 
         
